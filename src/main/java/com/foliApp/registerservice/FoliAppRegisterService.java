@@ -1,18 +1,37 @@
 package com.foliApp.registerservice;
 
+import com.foliApp.registerservice.interfaceAdapter.controller.CustomerController;
+import com.foliApp.registerservice.interfaceAdapter.controller.SupplierController;
+import com.foliApp.registerservice.web.resource.CustomerResource;
+import com.foliApp.registerservice.web.resource.SupplierResource;
+
 import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.inject.Inject;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/hello")
+@Path("/register")
 public class FoliAppRegisterService {
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Inject
+    CustomerController customerController;
+
+    @Inject
+    SupplierController supplierController;
+
+    @POST
+    @Path("/supplier/new")
     @RolesAllowed("USER")
-    public String hello() {
-        return "Hello RESTEasy";
+    @Produces(MediaType.APPLICATION_JSON)
+    public SupplierResource postNewSupplier(SupplierResource supplierResource) {
+        return supplierController.saveSupplier(supplierResource);
+    }
+
+    @POST
+    @Path("/customer/new")
+    @RolesAllowed("USER")
+    @Produces(MediaType.APPLICATION_JSON)
+    public CustomerResource postNewCustomer(CustomerResource customerResource) {
+        return customerController.saveCustomer(customerResource);
     }
 }
