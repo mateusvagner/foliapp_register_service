@@ -46,7 +46,7 @@ public class FoliAppRegisterService {
     }
 
     @GET
-    @Path("/supplier/{id}")
+    @Path("/customer/{id}")
     @RolesAllowed("USER")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.TEXT_PLAIN)
