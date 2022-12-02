@@ -45,6 +45,14 @@ public class FoliAppRegisterService {
         return supplierController.getAllSuppliers();
     }
 
+    @POST
+    @Path("/customer/new")
+    @RolesAllowed("USER")
+    @Produces(MediaType.APPLICATION_JSON)
+    public CustomerResource postNewCustomer(CustomerResource customerResource) {
+        return customerController.saveCustomer(customerResource);
+    }
+
     @GET
     @Path("/customer/{id}")
     @RolesAllowed("USER")
@@ -52,13 +60,6 @@ public class FoliAppRegisterService {
     @Consumes(MediaType.TEXT_PLAIN)
     public CustomerResource getCustomerById(@PathParam("id") String id) {
         return customerController.getCustomerById(Long.parseLong(id));
-    }
-    @POST
-    @Path("/customer/new")
-    @RolesAllowed("USER")
-    @Produces(MediaType.APPLICATION_JSON)
-    public CustomerResource postNewCustomer(CustomerResource customerResource) {
-        return customerController.saveCustomer(customerResource);
     }
 
     @GET
