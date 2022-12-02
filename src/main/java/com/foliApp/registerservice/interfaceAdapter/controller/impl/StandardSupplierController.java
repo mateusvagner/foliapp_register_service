@@ -38,4 +38,11 @@ public class StandardSupplierController implements SupplierController {
 
         return supplierResources;
     }
+
+    @Override
+    public SupplierResource getSupplierById(Long id) {
+        SupplierEntity entity = supplierDao.getById(id);
+
+        return supplierMapper.fromEntityToResource(entity);
+    }
 }

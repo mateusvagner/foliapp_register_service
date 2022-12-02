@@ -38,4 +38,11 @@ public class StandardCustomerController implements CustomerController {
 
         return customerResources;
     }
+
+    @Override
+    public CustomerResource getCustomerById(Long id) {
+        CustomerEntity entity = customerDao.getById(id);
+
+        return customerMapper.fromEntityToResource(entity);
+    }
 }
