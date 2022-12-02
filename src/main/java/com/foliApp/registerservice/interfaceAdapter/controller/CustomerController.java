@@ -10,4 +10,6 @@ public interface CustomerController {
     CustomerResource saveCustomer(CustomerResource customer);
 
     List<CustomerResource> getAllCustomers();
+
+    CustomerResource getCustomerById(Long id);
 }
