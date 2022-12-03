@@ -41,6 +41,7 @@ public class FoliAppRegisterService {
     @Path("/supplier/all")
     @RolesAllowed("USER")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
     public List<SupplierResource> getAllSuppliers() {
         return supplierController.getAllSuppliers();
     }
@@ -66,6 +67,7 @@ public class FoliAppRegisterService {
     @Path("/customer/all")
     @RolesAllowed("USER")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
     public List<CustomerResource> getAllCustomers() {
         return customerController.getAllCustomers();
     }
