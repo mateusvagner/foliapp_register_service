@@ -23,4 +23,9 @@ public class PanacheSupplierDao implements SupplierDao, PanacheRepository<Suppli
     public List<SupplierEntity> getAll() {
         return findAll().list();
     }
+
+    @Override
+    public SupplierEntity getById(Long id) {
+        return findById(id);
+    }
 }

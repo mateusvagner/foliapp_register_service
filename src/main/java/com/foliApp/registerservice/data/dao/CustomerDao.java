@@ -9,4 +9,6 @@ public interface CustomerDao {
     CustomerEntity save(CustomerEntity customer);
 
     List<CustomerEntity> getAll();
+
+    CustomerEntity getById(Long id);
 }

@@ -9,4 +9,6 @@ public interface SupplierDao {
     SupplierEntity save(SupplierEntity supplier);
 
     List<SupplierEntity> getAll();
+
+    SupplierEntity getById(Long id);
 }

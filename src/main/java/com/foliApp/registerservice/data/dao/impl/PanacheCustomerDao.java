@@ -22,4 +22,9 @@ public class PanacheCustomerDao implements CustomerDao, PanacheRepository<Custom
     public List<CustomerEntity> getAll() {
         return findAll().list();
     }
+
+    @Override
+    public CustomerEntity getById(Long id) {
+        return findById(id);
+    }
 }

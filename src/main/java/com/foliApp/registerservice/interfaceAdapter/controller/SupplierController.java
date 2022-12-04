@@ -9,4 +9,6 @@ public interface SupplierController {
     SupplierResource saveSupplier(SupplierResource supplier);
 
     List<SupplierResource> getAllSuppliers();
+
+    SupplierResource getSupplierById(Long id);
 }
