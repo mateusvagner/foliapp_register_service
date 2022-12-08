@@ -11,6 +11,7 @@ public class StandardSupplierMapper implements SupplierMapper {
     @Override
     public SupplierEntity fromResourceToEntity(SupplierResource supplier) {
         SupplierEntity supplierEntity = new SupplierEntity();
+        supplierEntity.setOwnerKeyIdentifier(supplier.getOwnerKeyIdentifier());
         supplierEntity.setName(supplier.getName());
         supplierEntity.setPhone(supplier.getPhone());
         supplierEntity.setEmail(supplier.getEmail());
@@ -23,6 +24,7 @@ public class StandardSupplierMapper implements SupplierMapper {
     @Override
     public SupplierResource fromEntityToResource(SupplierEntity supplier) {
         SupplierResource supplierResource = new SupplierResource();
+        supplierResource.setOwnerKeyIdentifier(supplier.getOwnerKeyIdentifier());
         supplierResource.setId(supplier.getId());
         supplierResource.setName(supplier.getName());
         supplierResource.setPhone(supplier.getPhone());
