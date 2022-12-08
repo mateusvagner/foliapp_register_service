@@ -4,11 +4,14 @@ import com.foliApp.registerservice.interfaceAdapter.controller.CustomerControlle
 import com.foliApp.registerservice.interfaceAdapter.controller.SupplierController;
 import com.foliApp.registerservice.web.resource.CustomerResource;
 import com.foliApp.registerservice.web.resource.SupplierResource;
+import org.eclipse.microprofile.jwt.Claim;
+import org.eclipse.microprofile.jwt.Claims;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/register")
@@ -20,11 +23,15 @@ public class FoliAppRegisterService {
     @Inject
     SupplierController supplierController;
 
+    @Claim(standard = Claims.kid)
+    String keyIdentifier;
+
     @POST
     @Path("/supplier/new")
     @RolesAllowed("USER")
     @Produces(MediaType.APPLICATION_JSON)
     public SupplierResource postNewSupplier(SupplierResource supplierResource) {
+        supplierResource.setOwnerKeyIdentifier(keyIdentifier);
         return supplierController.saveSupplier(supplierResource);
     }
 
@@ -43,7 +50,15 @@ public class FoliAppRegisterService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.TEXT_PLAIN)
     public List<SupplierResource> getAllSuppliers() {
-        return supplierController.getAllSuppliers();
+        List<SupplierResource> allUserSuppliers = new ArrayList<>();
+
+        for (SupplierResource supplier : supplierController.getAllSuppliers()) {
+            if (supplier.getOwnerKeyIdentifier().equals(keyIdentifier)) {
+                allUserSuppliers.add(supplier);
+            }
+        }
+
+        return allUserSuppliers;
     }
 
     @POST
@@ -51,6 +66,7 @@ public class FoliAppRegisterService {
     @RolesAllowed("USER")
     @Produces(MediaType.APPLICATION_JSON)
     public CustomerResource postNewCustomer(CustomerResource customerResource) {
+        customerResource.setOwnerKeyIdentifier(keyIdentifier);
         return customerController.saveCustomer(customerResource);
     }
 
@@ -69,6 +85,13 @@ public class FoliAppRegisterService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.TEXT_PLAIN)
     public List<CustomerResource> getAllCustomers() {
-        return customerController.getAllCustomers();
+        List<CustomerResource> allUserCustomers = new ArrayList<>();
+
+        for (CustomerResource customer : customerController.getAllCustomers()) {
+            if (customer.getOwnerKeyIdentifier().equals(keyIdentifier)) {
+                allUserCustomers.add(customer);
+            }
+        }
+        return allUserCustomers;
     }
 }
