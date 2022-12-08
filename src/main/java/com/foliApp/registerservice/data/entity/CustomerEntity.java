@@ -12,13 +12,10 @@ public class CustomerEntity {
     @Id
     @GeneratedValue
     private Long id;
-
+    private String ownerKeyIdentifier;
     String name;
-
     String phone;
-
     String email;
-
     String address;
 
     public Long getId() {
@@ -27,6 +24,14 @@ public class CustomerEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getOwnerKeyIdentifier() {
+        return ownerKeyIdentifier;
+    }
+
+    public void setOwnerKeyIdentifier(String ownerKeyIdentifier) {
+        this.ownerKeyIdentifier = ownerKeyIdentifier;
     }
 
     public String getName() {

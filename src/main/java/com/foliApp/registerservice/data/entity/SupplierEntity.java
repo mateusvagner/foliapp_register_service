@@ -10,16 +10,12 @@ public class SupplierEntity {
     @Id
     @GeneratedValue
     private Long id;
-
-    String name;
-
-    String phone;
-
-    String email;
-
-    String address;
-
-    String type;
+    private String ownerKeyIdentifier;
+    private String name;
+    private String phone;
+    private String email;
+    private String address;
+    private String type;
 
     public Long getId() {
         return id;
@@ -27,6 +23,14 @@ public class SupplierEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getOwnerKeyIdentifier() {
+        return ownerKeyIdentifier;
+    }
+
+    public void setOwnerKeyIdentifier(String ownerKeyIdentifier) {
+        this.ownerKeyIdentifier = ownerKeyIdentifier;
     }
 
     public String getName() {
